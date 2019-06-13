@@ -1,18 +1,30 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
-  </div>
+  <v-app>
+    <v-toolbar app>
+      <v-toolbar-title class="headline text-uppercase">
+        <router-link to="/"
+          ><span>Snippy</span>
+          <span class="font-weight-light">Code snippets</span>
+        </router-link>
+      </v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-btn
+        flat
+        href="https://github.com/joranquintne/snippy/releases/latest"
+        target="_blank"
+      >
+        <span class="mr-2">Latest Release</span>
+      </v-btn>
+    </v-toolbar>
+    <v-content>
+      <router-view></router-view>
+    </v-content>
+  </v-app>
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
-
 export default {
-  name: "app",
-  components: {
-    HelloWorld
-  }
+  name: "App"
 };
 </script>
 
@@ -24,5 +36,34 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+
+*::-moz-selection {
+  color: #44475a;
+  background-color: #f1fa8c;
+}
+*::selection {
+  color: #44475a;
+  background-color: #f1fa8c;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.headline {
+  a {
+    color: #bd93f9;
+    text-decoration: none;
+
+    &:hover,
+    &:active {
+      color: #ff92df;
+    }
+
+    &:focus {
+      text-decoration: underline;
+    }
+  }
 }
 </style>

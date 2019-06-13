@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Snippet.vue renders the props provided to the component 1`] = `
+<ul class="tags">
+  <li>some</li>
+  <li>tags</li>
+</ul>
+`;
