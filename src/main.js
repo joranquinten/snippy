@@ -2,8 +2,14 @@ import Vue from "vue";
 import Vuetify from "vuetify";
 import VueRouter from "vue-router";
 import VueClipboard from "vue-clipboard2";
+import VuePrismEditor from "vue-prism-editor";
 import App from "./App.vue";
+
 import "vuetify/dist/vuetify.min.css";
+
+import "vue-prism-editor/dist/VuePrismEditor.css"; // import the styles
+import "prismjs";
+import "prismjs/themes/prism.css";
 
 import "./registerServiceWorker";
 
@@ -11,7 +17,7 @@ Vue.config.productionTip = false;
 
 Vue.use(Vuetify, {
   theme: {
-    primary: "#F8F8F2",
+    primary: "#914bf5",
     secondary: "#BD93F9",
     accent: "#8BE9FD",
     error: "#FF5555",
@@ -22,6 +28,7 @@ Vue.use(Vuetify, {
 });
 Vue.use(VueRouter);
 Vue.use(VueClipboard);
+Vue.component("prism-editor", VuePrismEditor);
 
 import SnippetList from "./components/SnippetList";
 import EditSnippet from "./components/EditSnippet";
