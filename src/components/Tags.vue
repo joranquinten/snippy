@@ -19,9 +19,10 @@ export default {
 <style lang="scss" scoped>
 .tags {
   list-style: none;
-  margin: 0;
+  margin: 0 1em;
   overflow: hidden;
   padding: 0;
+  font-size: 0.72em;
 
   .tag {
     background: #eee;
@@ -37,7 +38,7 @@ export default {
   }
 
   .tag::before {
-    background: #fafafa;
+    background: #fff;
     border-radius: 10px;
     box-shadow: inset 0 1px rgba(0, 0, 0, 0.25);
     content: "";
@@ -49,7 +50,7 @@ export default {
   }
 
   .tag::after {
-    background: #fafafa;
+    background: #fff;
     border-bottom: 13px solid transparent;
     border-left: 10px solid #eee;
     border-top: 13px solid transparent;
