@@ -11,6 +11,7 @@
           :id="snippet._id"
           :title="snippet.title"
           :content="snippet.content"
+          :description="snippet.description"
           :language="snippet.language"
           :tags="snippet.tags"
         >

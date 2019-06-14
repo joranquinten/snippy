@@ -10,12 +10,14 @@
           @focus="$event.target.select()"
         ></v-text-field>
 
-        <v-text-field
-          label="Language"
-          outline
+        <v-select
           v-model="snippet.language"
-          @focus="$event.target.select()"
-        ></v-text-field>
+          :items="languages"
+          outline
+          chips
+          label="Language"
+          multiple
+        ></v-select>
 
         <v-text-field
           label="Tags"
@@ -23,6 +25,15 @@
           v-model="snippet.tags"
           @focus="$event.target.select()"
         ></v-text-field>
+
+        <v-textarea
+          label="Description"
+          outline
+          auto-grow
+          rows="1"
+          v-model="snippet.description"
+          @focus="$event.target.select()"
+        ></v-textarea>
 
         <v-textarea
           label="Snippet"
@@ -87,6 +98,21 @@ const getSnippet = (vm, id) => {
     .finally(() => (vm.loading = false));
 };
 
+const stringToArray = input => {
+  if (Array.isArray(input)) return input;
+
+  return (input || "").split(",").map(tag => tag.trim());
+};
+
+const prepareSnippet = snippet => {
+  const preparedSnippet = {
+    ...snippet,
+    tags: stringToArray(snippet.tags)
+  };
+
+  return preparedSnippet;
+};
+
 export default {
   name: "edit-snippet",
   data() {
@@ -95,8 +121,10 @@ export default {
       deleteDialog: false,
       errored: false,
       feedbackMsg: "",
+      languages: ["bash", "css", "git", "js", "node", "scss", "other"],
       snippet: {
         title: null,
+        description: null,
         content: null,
         language: null,
         tags: null
@@ -118,7 +146,7 @@ export default {
             `${process.env.VUE_APP_SNIPPY_API}/snippets/snippet/${
               this.$route.params.id
             }/update`,
-            this.snippet
+            prepareSnippet(this.snippet)
           )
           .then(response => {
             this.feedbackMsg = response.data;
@@ -133,7 +161,7 @@ export default {
         return axios
           .post(
             `${process.env.VUE_APP_SNIPPY_API}/snippets/snippet/create`,
-            this.snippet
+            prepareSnippet(this.snippet)
           )
           .then(response => {
             this.feedbackMsg = response.data;
