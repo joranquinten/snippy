@@ -2,8 +2,8 @@
   <v-card class="snippet">
     <v-card-title>
       <v-layout align-start justify-start row>
-        <ul class="languages" v-if="language">
-          <li :key="lang" v-for="lang in language">{{ lang }}</li>
+        <ul class="languages" v-if="languages">
+          <li :key="language" v-for="language in languages">{{ language }}</li>
         </ul>
         <h3 class="title">{{ title }}</h3>
       </v-layout>
@@ -80,7 +80,7 @@ export default {
     description: {
       type: String
     },
-    language: {
+    languages: {
       type: Array
     },
     tags: {

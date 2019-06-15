@@ -12,7 +12,7 @@
           :title="snippet.title"
           :content="snippet.content"
           :description="snippet.description"
-          :language="snippet.language"
+          :languages="snippet.languages"
           :tags="snippet.tags"
         >
         </snippet>

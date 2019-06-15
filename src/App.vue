@@ -10,7 +10,7 @@
       <v-spacer></v-spacer>
       <v-btn
         flat
-        href="https://github.com/joranquintne/snippy/releases/latest"
+        href="https://github.com/joranquinten/snippy/releases/latest"
         target="_blank"
       >
         <span class="mr-2">Latest Release</span>

@@ -11,11 +11,11 @@
         ></v-text-field>
 
         <v-select
-          v-model="snippet.language"
+          v-model="snippet.languages"
           :items="languages"
           outline
           chips
-          label="Language"
+          label="Languages"
           multiple
         ></v-select>
 
