@@ -1,5 +1,7 @@
 # snippy
 
+This project has a dependency on the [snippy-api](https://github.com/joranquinten/snippy-api/releases/latest).
+
 ## Project setup
 ```
 yarn install
