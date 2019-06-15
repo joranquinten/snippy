@@ -8,6 +8,15 @@
         </router-link>
       </v-toolbar-title>
       <v-spacer></v-spacer>
+      <v-text-field
+        solo-inverted
+        flat
+        label="Search"
+        append-icon="search"
+        v-model="searchQuery"
+        v-on:keyup.enter="search"
+      ></v-text-field>
+      <v-spacer></v-spacer>
       <v-btn
         flat
         href="https://github.com/joranquinten/snippy/releases/latest"
@@ -24,7 +33,20 @@
 
 <script>
 export default {
-  name: "App"
+  name: "App",
+  data() {
+    return {
+      searchQuery: null
+    };
+  },
+  methods: {
+    search: function() {
+      if (this.searchQuery) {
+        this.$router.push(`/snippets/search/${encodeURI(this.searchQuery)}`);
+        this.searchQuery = "";
+      }
+    }
+  }
 };
 </script>
 

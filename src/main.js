@@ -32,11 +32,12 @@ Vue.component("prism-editor", VuePrismEditor);
 
 import SnippetList from "./components/SnippetList";
 import EditSnippet from "./components/EditSnippet";
+import SearchSnippet from "./components/SearchSnippet";
 
 const routes = [
   { path: "/", component: SnippetList },
   { path: "/snippet/new", component: EditSnippet },
-  { path: "/snippet/:id/edit", component: EditSnippet }
+  { path: "/snippets/search/:query", component: SearchSnippet }
 ];
 
 const router = new VueRouter({
