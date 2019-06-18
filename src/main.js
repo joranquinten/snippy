@@ -30,18 +30,19 @@ Vue.use(VueRouter);
 Vue.use(VueClipboard);
 Vue.component("prism-editor", VuePrismEditor);
 
-import SnippetList from "./components/SnippetList";
+import SnippetsOverview from "./components/SnippetsOverview";
 import EditSnippet from "./components/EditSnippet";
-import SearchSnippet from "./components/SearchSnippet";
 
 const routes = [
-  { path: "/", component: SnippetList },
+  { path: "/", component: SnippetsOverview },
   { path: "/snippet/new", component: EditSnippet },
-  { path: "/snippets/search/:query", component: SearchSnippet }
+  { path: "/snippets/search/:query", component: SnippetsOverview },
+  { path: "/snippets/tags/:tag", component: SnippetsOverview },
+  { path: "/snippets/languages/:language", component: SnippetsOverview }
 ];
 
 const router = new VueRouter({
-  routes // short for `routes: routes`
+  routes
 });
 
 new Vue({

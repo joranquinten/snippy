@@ -3,7 +3,11 @@
     <v-card-title>
       <v-layout align-start justify-start row>
         <ul class="languages" v-if="languages">
-          <li :key="language" v-for="language in languages">{{ language }}</li>
+          <li :key="language" v-for="language in languages">
+            <router-link :to="`/snippets/languages/${encodeURI(language)}`">{{
+              language
+            }}</router-link>
+          </li>
         </ul>
         <h3 class="title">{{ title }}</h3>
       </v-layout>
@@ -122,25 +126,42 @@ export default {
       position: relative;
       z-index: 0;
       vertical-align: middle;
-    }
 
-    li::before {
-      content: "";
-      z-index: -1;
-      display: inline-block;
-      width: calc(100% + 4px);
-      height: 80%;
-      position: absolute;
-      left: -2px;
-      bottom: 12%;
-      background-image: linear-gradient(
-        to right,
-        rgba(241, 250, 140, 0) 0%,
-        yellow 50%
-      );
-      background-position: -99.99% 0;
-      background-size: 200% 10px;
-      transform: skew(0deg, -3deg);
+      a {
+        text-decoration: none;
+        color: #2c3e50;
+
+        &:hover {
+          color: #f8f8f8;
+        }
+
+        &::before {
+          content: "";
+          z-index: -1;
+          display: inline-block;
+          width: calc(100% + 4px);
+          height: 80%;
+          position: absolute;
+          left: -2px;
+          bottom: 12%;
+          background-image: linear-gradient(
+            to right,
+            rgba(241, 250, 140, 0) 0%,
+            yellow 50%
+          );
+          background-position: -99.99% 0;
+          background-size: 200% 10px;
+          transform: skew(0deg, -3deg);
+        }
+
+        &:hover::before {
+          background-image: linear-gradient(
+            to right,
+            rgba(241, 250, 140, 0) 0%,
+            #e91e63 50%
+          );
+        }
+      }
     }
 
     li:not(:last-of-type)::after {
