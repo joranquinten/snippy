@@ -5,7 +5,8 @@ const webAuth = new auth0.WebAuth({
   domain: process.env.VUE_APP_AUTH0_DOMAIN,
   redirectUri: `${window.location.origin}/callback`,
   clientID: process.env.VUE_APP_AUTH0_CLIENT_ID,
-  responseType: "id_token",
+  audience: process.env.VUE_APP_AUTH0_AUDIENCE,
+  responseType: "token id_token",
   scope: "openid profile email"
 });
 
@@ -16,6 +17,9 @@ class AuthService extends EventEmitter {
   idToken = null;
   profile = null;
   tokenExpiry = null;
+
+  accessToken = null;
+  accessTokenExpiry = null;
 
   // Starts the user login flow
   login(customState) {
@@ -42,6 +46,9 @@ class AuthService extends EventEmitter {
     this.idToken = authResult.idToken;
     this.profile = authResult.idTokenPayload;
     this.tokenExpiry = new Date(this.profile.exp * 1000);
+
+    this.accessToken = authResult.accessToken;
+    this.accessTokenExpiry = new Date(Date.now() + authResult.expiresIn * 1000);
 
     localStorage.setItem(localStorageKey, "true");
 
@@ -88,6 +95,26 @@ class AuthService extends EventEmitter {
       Date.now() < this.tokenExpiry &&
       localStorage.getItem(localStorageKey) === "true"
     );
+  }
+
+  isAccessTokenValid() {
+    return (
+      this.accessToken &&
+      this.accessTokenExpiry &&
+      Date.now() < this.accessTokenExpiry
+    );
+  }
+
+  getAccessToken() {
+    return new Promise((resolve, reject) => {
+      if (this.isAccessTokenValid()) {
+        resolve(this.accessToken);
+      } else {
+        this.renewTokens().then(authResult => {
+          resolve(authResult.accessToken);
+        }, reject);
+      }
+    });
   }
 }
 

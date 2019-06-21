@@ -138,7 +138,9 @@ export default {
     }
   },
   methods: {
-    saveSnippet() {
+    async saveSnippet() {
+      const accessToken = await this.$auth.getAccessToken();
+
       // UPDATE A SNIPPET
       if (this.$route.params.id) {
         return axios
@@ -161,7 +163,12 @@ export default {
         return axios
           .post(
             `${process.env.VUE_APP_SNIPPY_API}/snippets/snippet/create`,
-            prepareSnippet(this.snippet)
+            prepareSnippet(this.snippet),
+            {
+              headers: {
+                Authorization: `Bearer ${accessToken}`
+              }
+            }
           )
           .then(response => {
             this.feedbackMsg = response.data;
@@ -174,13 +181,19 @@ export default {
           });
       }
     },
-    deleteSnippet() {
+    async deleteSnippet() {
       if (this.$route.params.id) {
+        const accessToken = await this.$auth.getAccessToken();
         return axios
           .delete(
             `${process.env.VUE_APP_SNIPPY_API}/snippets/snippet/${
               this.$route.params.id
-            }/delete`
+            }/delete`,
+            {
+              headers: {
+                Authorization: `Bearer ${accessToken}`
+              }
+            }
           )
           .then(response => {
             this.feedbackMsg = response.data;
@@ -192,7 +205,6 @@ export default {
             this.errored = true;
           });
       }
-      ///snippets/snippet/:id/delete, supported methods: DELETE
     }
   }
 };
