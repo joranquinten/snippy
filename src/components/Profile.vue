@@ -27,8 +27,7 @@
 export default {
   data() {
     return {
-      profile: this.$auth.profile,
-      isAuthenticated: false
+      profile: this.$auth.profile
     };
   },
   methods: {
