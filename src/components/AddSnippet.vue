@@ -1,5 +1,14 @@
 <template>
-  <v-btn fixed dark fab bottom right color="#BD93F9" v-on:click.stop="goToNew">
+  <v-btn
+    v-if="$auth.isAuthenticated()"
+    fixed
+    dark
+    fab
+    bottom
+    right
+    color="#BD93F9"
+    v-on:click.stop="goToNew"
+  >
     <v-icon>add</v-icon>
   </v-btn>
 </template>

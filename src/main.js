@@ -1,6 +1,5 @@
 import Vue from "vue";
 import Vuetify from "vuetify";
-import VueRouter from "vue-router";
 import VueClipboard from "vue-clipboard2";
 import VuePrismEditor from "vue-prism-editor";
 import App from "./App.vue";
@@ -11,7 +10,14 @@ import "vue-prism-editor/dist/VuePrismEditor.css"; // import the styles
 import "prismjs";
 import "prismjs/themes/prism.css";
 
+import router from "./router";
+
+import AuthPlugin from "./plugins/auth";
+
 import "./registerServiceWorker";
+
+Vue.use(VueClipboard);
+Vue.use(AuthPlugin);
 
 Vue.config.productionTip = false;
 
@@ -26,24 +32,8 @@ Vue.use(Vuetify, {
     warning: "#FFB86C"
   }
 });
-Vue.use(VueRouter);
-Vue.use(VueClipboard);
+
 Vue.component("prism-editor", VuePrismEditor);
-
-import SnippetsOverview from "./components/SnippetsOverview";
-import EditSnippet from "./components/EditSnippet";
-
-const routes = [
-  { path: "/", component: SnippetsOverview },
-  { path: "/snippet/new", component: EditSnippet },
-  { path: "/snippets/search/:query", component: SnippetsOverview },
-  { path: "/snippets/tags/:tag", component: SnippetsOverview },
-  { path: "/snippets/languages/:language", component: SnippetsOverview }
-];
-
-const router = new VueRouter({
-  routes
-});
 
 new Vue({
   router,

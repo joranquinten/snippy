@@ -40,8 +40,8 @@
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <router-link :to="`/snippet/${id}/edit`"
-            ><v-btn flat>Edit</v-btn></router-link
+          <v-btn flat v-if="$auth.isAuthenticated()" :to="`/snippet/${id}/edit`"
+            >Edit</v-btn
           >
           <v-btn
             flat="flat"

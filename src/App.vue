@@ -7,23 +7,29 @@
           <span class="font-weight-light">Code snippets</span>
         </router-link>
       </v-toolbar-title>
-      <v-spacer></v-spacer>
-      <v-text-field
-        solo-inverted
-        flat
-        label="Search"
-        append-icon="search"
-        v-model="searchQuery"
-        v-on:keyup.enter="search"
-      ></v-text-field>
-      <v-spacer></v-spacer>
-      <v-btn
-        flat
-        href="https://github.com/joranquinten/snippy/releases/latest"
-        target="_blank"
-      >
-        <span class="mr-2">Latest Release</span>
-      </v-btn>
+      <v-layout align-center justify-space-between row fill-height>
+        <v-spacer></v-spacer>
+        <v-text-field
+          solo-inverted
+          flat
+          label="Search"
+          append-icon="search"
+          v-model="searchQuery"
+          v-on:keyup.enter="search"
+        ></v-text-field>
+
+        <v-btn flat to="/profile" v-if="isAuthenticated">Profile</v-btn>
+        <v-btn v-if="!isAuthenticated" flat @click.prevent="login">
+          <span class="mr-2">Login</span>
+        </v-btn>
+        <v-btn
+          flat
+          href="https://github.com/joranquinten/snippy/releases/latest"
+          target="_blank"
+        >
+          <span class="mr-2">Latest Release</span>
+        </v-btn>
+      </v-layout>
     </v-toolbar>
     <v-content>
       <router-view></router-view>
@@ -36,8 +42,17 @@ export default {
   name: "App",
   data() {
     return {
-      searchQuery: null
+      searchQuery: null,
+      isAuthenticated: false
     };
+  },
+  async created() {
+    try {
+      await this.$auth.renewTokens();
+    } catch (e) {
+      // eslint-disable-next-line
+      console.error(e);
+    }
   },
   methods: {
     search: function() {
@@ -45,6 +60,16 @@ export default {
         this.$router.push(`/snippets/search/${encodeURI(this.searchQuery)}`);
         this.searchQuery = "";
       }
+    },
+    login() {
+      this.$auth.login();
+    },
+    logout() {
+      this.$auth.logOut();
+    },
+    handleLoginEvent(data) {
+      this.isAuthenticated = data.loggedIn;
+      this.profile = data.profile;
     }
   }
 };
