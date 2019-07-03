@@ -137,7 +137,7 @@ export default {
         title: null,
         description: null,
         content: null,
-        language: null,
+        languages: null,
         tags: null
       },
       id: this.$route.params.id || null
