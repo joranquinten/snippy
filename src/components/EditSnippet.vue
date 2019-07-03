@@ -83,6 +83,8 @@
 </template>
 
 <script>
+// https://vuejsdevelopers.com/2018/08/27/vue-js-form-handling-vuelidate/
+
 import axios from "axios";
 
 const getSnippet = (vm, id) => {
@@ -121,12 +123,21 @@ export default {
       deleteDialog: false,
       errored: false,
       feedbackMsg: "",
-      languages: ["bash", "css", "git", "js", "node", "scss", "other"],
+      languages: [
+        "bash",
+        "css",
+        "git",
+        "js",
+        "node",
+        "scss",
+        "OS specific",
+        "other"
+      ],
       snippet: {
         title: null,
         description: null,
         content: null,
-        language: null,
+        languages: null,
         tags: null
       },
       id: this.$route.params.id || null
@@ -192,7 +203,6 @@ export default {
             this.errored = true;
           });
       }
-      ///snippets/snippet/:id/delete, supported methods: DELETE
     }
   }
 };

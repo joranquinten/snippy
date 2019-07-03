@@ -36,6 +36,7 @@ import EditSnippet from "./components/EditSnippet";
 const routes = [
   { path: "/", component: SnippetsOverview },
   { path: "/snippet/new", component: EditSnippet },
+  { path: "/snippet/:id/edit", component: EditSnippet },
   { path: "/snippets/search/:query", component: SnippetsOverview },
   { path: "/snippets/tags/:tag", component: SnippetsOverview },
   { path: "/snippets/languages/:language", component: SnippetsOverview }
