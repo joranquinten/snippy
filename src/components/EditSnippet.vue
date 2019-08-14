@@ -1,7 +1,9 @@
 <template>
   <v-layout>
     <v-flex xs12 sm6 offset-sm3>
-      <div v-if="errored && feedbackMsg">{{ feedbackMsg }}</div>
+      <v-alert v-model="errored" icon outline type="error">
+        {{ feedbackMsg }}
+      </v-alert>
       <v-form v-on:submit.prevent="onSubmit">
         <v-text-field
           label="Title"
