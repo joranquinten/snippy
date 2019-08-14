@@ -1,6 +1,9 @@
 <template>
   <v-layout>
     <v-flex xs12 sm6 offset-sm3>
+      <v-alert v-model="errored" icon outline type="error">
+        {{ feedbackMsg }}
+      </v-alert>
       <add-snippet></add-snippet>
 
       <div
